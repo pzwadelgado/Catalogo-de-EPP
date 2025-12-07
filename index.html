@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de EPP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="book-container">
+        <div id="book" class="book">
+            <!-- Las páginas se generarán aquí por JS -->
+        </div>
+    </div>
+    <div class="navigation">
+        <button id="prev-btn">Anterior</button>
+        <button id="next-btn">Siguiente</button>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Botón de Configuración -->
+    <button id="settings-btn" class="settings-btn">⚙️</button>
+
+    <!-- El Modal de Configuración -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-btn">&times;</span>
+                <h2>Configuración de Páginas</h2>
+            </div>
+            <div class="modal-body">
+                <ul id="page-list" class="page-list">
+                    <!-- La lista de páginas se generará aquí -->
+                </ul>
+                <div class="upload-section">
+                    <input type="file" id="image-upload" accept="image/*" multiple>
+                    <button id="add-page-btn">Añadir Páginas Seleccionadas</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-changes-btn">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
