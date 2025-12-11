@@ -1,5 +1,5 @@
 const initialPages = [
-    "paginas/01-portada.jpg",
+    "paginas/01-portada.JPG",
     "paginas/02-indice.jpg",
     "paginas/Paginas/Diapositiva1.JPG",
     "paginas/Paginas/Diapositiva2.JPG",
