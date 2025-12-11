@@ -4,6 +4,7 @@ const initialPages = [
     "paginas/Paginas/Diapositiva1.JPG",
     "paginas/Paginas/Diapositiva2.JPG",
     "paginas/Paginas/Diapositiva3.JPG",
+    "paginas/Paginas/Diapositiva4.JPG",
     "paginas/Paginas/Diapositiva5.JPG",
     "paginas/Paginas/Diapositiva6.JPG",
     "paginas/Paginas/Diapositiva7.JPG",
@@ -27,7 +28,5 @@ const initialPages = [
     "paginas/Paginas/Diapositiva25.JPG",
     "paginas/Paginas/Diapositiva26.JPG",
     "paginas/Paginas/Diapositiva27.JPG",
-    "paginas/Paginas/Diapositiva28.JPG",
-    "paginas/Paginas/Diapositiva29.JPG",
-   
+    "paginas/Paginas/Diapositiva28.jpg"
 ];

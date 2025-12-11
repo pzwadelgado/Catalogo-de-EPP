@@ -63,8 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateButtons() {
         const numSheets = pageElements.length;
+        const hasOddPages = pages.length % 2 !== 0;
+
         prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === numSheets;
+
+        // Si hay un número impar de páginas y estamos en la última hoja,
+        // ya hemos mostrado la última página al frente, así que desactivamos 'siguiente'.
+        if (hasOddPages && currentPage === numSheets - 1) {
+            nextBtn.disabled = true;
+        } else {
+            nextBtn.disabled = currentPage === numSheets;
+        }
     }
 
     nextBtn.addEventListener('click', () => turnPage('next'));
