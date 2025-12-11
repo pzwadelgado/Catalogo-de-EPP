@@ -13,23 +13,36 @@ document.addEventListener('DOMContentLoaded', () => {
         pageElements = [];
         currentPage = 0;
 
-        for (let i = 0; i < pages.length; i += 2) {
+        const bookPages = [...pages];
+        if (bookPages.length % 2 !== 0) {
+            bookPages.push(null); // Añadir una página en blanco al final si el número es impar
+        }
+
+        for (let i = 0; i < bookPages.length; i += 2) {
             const sheet = document.createElement('div');
             sheet.classList.add('page');
 
             const front = document.createElement('div');
             front.classList.add('page-content', 'front');
-            if (pages[i]) {
+            if (bookPages[i]) {
                 const frontImg = document.createElement('img');
-                frontImg.src = pages[i];
+                frontImg.src = bookPages[i];
+                frontImg.onerror = () => {
+                    console.error(`Error al cargar la imagen: ${bookPages[i]}`);
+                    front.innerHTML = `<div class="error-placeholder">Error al cargar: ${bookPages[i].split('/').pop()}</div>`;
+                };
                 front.appendChild(frontImg);
             }
 
             const back = document.createElement('div');
             back.classList.add('page-content', 'back');
-            if (pages[i + 1]) {
+            if (bookPages[i + 1]) {
                 const backImg = document.createElement('img');
-                backImg.src = pages[i + 1];
+                backImg.src = bookPages[i + 1];
+                backImg.onerror = () => {
+                    console.error(`Error al cargar la imagen: ${bookPages[i + 1]}`);
+                    back.innerHTML = `<div class="error-placeholder">Error al cargar: ${bookPages[i + 1].split('/').pop()}</div>`;
+                };
                 back.appendChild(backImg);
             }
             
@@ -137,7 +150,15 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'none';
     }
 
-    settingsBtn.addEventListener('click', openModal);
+    settingsBtn.addEventListener('click', () => {
+        const password = prompt("Por favor, introduce la clave para acceder a la configuración:");
+        if (password === "1465") {
+            openModal();
+        } else if (password !== null) { // No mostrar alerta si el usuario cancela
+            alert("Clave incorrecta.");
+        }
+    });
+
     closeBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (event) => {
         if (event.target == modal) {
