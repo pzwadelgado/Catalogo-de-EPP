@@ -3,10 +3,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
 
-    // Cargar páginas desde localStorage o usar las iniciales
-    let pages = JSON.parse(localStorage.getItem('catalogPages_v3')) || [...initialPages];
-    let currentPage = 0;
+    // CONFIGURACIÓN AUTOMÁTICA DESDE GITHUB
+    const username = 'pzwadelgado';
+    const repo = 'Catalogo-de-EPP';
+    const folder = 'paginas'; 
+
+    let pages = [];
     let pageElements = [];
+    let currentPage = 0;
+
+    async function loadPagesFromGitHub() {
+        const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folder}`;
+        try {
+            const response = await fetch(apiUrl);
+            const files = await response.json();
+
+            // Filtra imágenes y las ordena numéricamente
+            pages = files
+                .filter(file => file.name.match(/\.(jpe?g|png|gif|webp)$/i))
+                .sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: 'base'}))
+                .map(file => file.download_url);
+
+            if (pages.length > 0) {
+                setupBook();
+            } else {
+                console.error("No se encontraron imágenes en la carpeta.");
+            }
+        } catch (error) {
+            console.error("Error consultando GitHub:", error);
+        }
+    }
 
     function setupBook() {
         book.innerHTML = '';
@@ -100,8 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', () => turnPage('next'));
     prevBtn.addEventListener('click', () => turnPage('prev'));
 
-    setupBook();
-    updateButtons();
+    loadPagesFromGitHub();
 
     // --- Modal de Configuración ---
     const settingsBtn = document.getElementById('settings-btn');
@@ -204,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     saveChangesBtn.addEventListener('click', () => {
         // Guardar el orden actual en localStorage
-        localStorage.setItem('catalogPages', JSON.stringify(pages));
+       // localStorage.setItem('catalogPages', JSON.stringify(pages));
 
         // Reconstruir el libro con el array 'pages' actualizado
         currentPage = 0; // Volver a la primera página
