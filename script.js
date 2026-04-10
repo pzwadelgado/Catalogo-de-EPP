@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
             book.appendChild(el);
         });
 
+        book.classList.add('closed');
+
         updateButtons();
     }
 
@@ -79,6 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasOddPages = pages.length % 2 !== 0;
 
         prevBtn.disabled = currentPage === 0;
+        // Centrar la portada si estamos en la página 0
+    if (currentPage === 0) {
+        book.classList.add('closed');
+    } else {
+        book.classList.remove('closed');
+    }
 
         // Si hay un número impar de páginas y estamos en la última hoja,
         // ya hemos mostrado la última página al frente, así que desactivamos 'siguiente'.
