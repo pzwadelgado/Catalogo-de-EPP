@@ -23,8 +23,8 @@ body {
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.5s;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    transition: transform 0.5s ease-in-out; /* Añade o asegura esta línea */
+    /box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
 .page {
@@ -260,4 +260,11 @@ body {
     padding: 10px;
     font-size: 14px;
     background-color: #fff0f0;
+}
+
+/* AÑADE ESTA REGLA NUEVA AL FINAL DE TU ARCHIVO */
+.book.closed {
+    /* Desplazamos el libro un 25% a la izquierda para que la 
+       mitad derecha (la portada) quede centrada en la pantalla */
+    transform: translateX(-25%);
 }
